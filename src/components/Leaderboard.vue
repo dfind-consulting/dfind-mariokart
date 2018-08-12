@@ -14,10 +14,9 @@
           <tr :key="player.id">
             <td>{{index + 1}}</td>
             <td>{{player.name}}</td>
-            <td>{{player.time}}</td>
+            <td>{{player.duration | millisToHumanReadable}}</td>
           </tr>
         </template>
-
       </tbody>
     </table>
   </div>
@@ -35,7 +34,7 @@ export default {
     };
   },
   created() {
-    db.collection('players').get()
+    db.collection('players').orderBy("duration").limit(100).get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           let player = doc.data()
@@ -44,23 +43,17 @@ export default {
         });
       });
   },
+  filters: {
+    millisToHumanReadable(duration) {
+      let minutes = Math.floor(duration / 60000)
+      let seconds = ((duration % 60000) / 1000).toFixed(0);
+      let centiseconds = ((duration / 10) % 100).toFixed(0);
+      return minutes + "'" + (seconds < 10 ? '0' : '') + seconds + "''" + (seconds < 10 ? '0' : '') + centiseconds;
+    }
+  }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
 </style>

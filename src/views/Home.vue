@@ -1,18 +1,19 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Leaderboard msg="Welcome to Your Vue.js App"/>
+    <Leaderboard />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Leaderboard from '@/components/Leaderboard.vue';
+import AddTime from '@/components/AddTime.vue';
 
 export default {
   name: 'home',
   components: {
     Leaderboard,
+    AddTime
   },
 };
 </script>
