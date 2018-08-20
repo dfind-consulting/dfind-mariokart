@@ -8,8 +8,8 @@
 export default {
   name: 'App',
   components: {
-  }
-}
+  },
+};
 </script>
 <style>
 @font-face {
@@ -25,6 +25,6 @@ body {
     background-image: url("./assets/background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center; 
+    background-position: center;
 }
 </style>

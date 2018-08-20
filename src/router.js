@@ -16,17 +16,17 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
     },
     {
       path: '/add',
       name: 'add',
       component: AddTime,
       meta: {
-        requiresAuth: true
-      }
-    }
+        requiresAuth: true,
+      },
+    },
   ],
 });
 
-export default router
+export default router;

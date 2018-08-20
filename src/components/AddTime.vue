@@ -32,53 +32,53 @@
 </template>
 
 <script>
-  import db from '@/firebase/init'
-  import slugify from 'slugify'
-  export default {
-    name: 'AddTimer',
-    data() {
-      return {
-        name: null,
-        email: null,
-        minutes: 0,
-        seconds: 0,
-        centiseconds: 0,
-        slug: null,
+import db from '@/firebase/init';
+import slugify from 'slugify';
 
-        feedback: null
+export default {
+  name: 'AddTimer',
+  data() {
+    return {
+      name: null,
+      email: null,
+      minutes: 0,
+      seconds: 0,
+      centiseconds: 0,
+      slug: null,
+
+      feedback: null,
+    };
+  },
+
+  methods: {
+    addTime() {
+      if (this.name) {
+        this.feedback = null;
+        // create a slug
+        this.slug = slugify(this.name, {
+          replacement: '-',
+          remove: /[$*_+~.()'"!\-:@]/g,
+          lower: true,
+        });
+        // save to firestore
+        db.collection('players').add({
+          name: this.name,
+          email: this.email,
+          duration: (this.minutes * 60000) + (this.seconds * 1000) + (this.centiseconds * 10),
+          slug: this.slug,
+        }).then(() => {
+          this.$router.push({
+            name: 'leaderboard',
+          });
+        }).catch((err) => {
+          this.feedback = err;
+        });
+      } else {
+        this.feedback = 'Adding new time failed';
       }
-
     },
-
-    methods: {
-      addTime() {
-        if (this.name) {
-          this.feedback = null
-          // create a slug
-          this.slug = slugify(this.name, {
-            replacement: '-',
-            remove: /[$*_+~.()'"!\-:@]/g,
-            lower: true
-          })
-          //save to firestore
-          db.collection('players').add({
-            name: this.name,
-            email: this.email,
-            duration: this.minutes * 60000 + this.seconds * 1000 + this.centiseconds * 10,
-            slug: this.slug
-          }).then(() => {
-            this.$router.push({
-              name: 'leaderboard'
-            })
-          }).catch(err => {
-            console.log(err)
-          })
-        } else {
-          this.feedback = 'Adding new time failed'
-        }
-      },
-    }
-  }
+  },
+};
 </script>
 
 <style>

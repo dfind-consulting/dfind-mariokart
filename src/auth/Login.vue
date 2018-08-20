@@ -22,34 +22,35 @@
 </template>
 
 <script>
-  import firebase from 'firebase'
-  export default {
-    name: 'Login',
-    data() {
-      return {
-        email: null,
-        password: null,
-        feedback: null
+import firebase from 'firebase';
+
+export default {
+  name: 'Login',
+  data() {
+    return {
+      email: null,
+      password: null,
+      feedback: null,
+    };
+  },
+  methods: {
+    login() {
+      if (this.email && this.password) {
+        this.feedback = null;
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            this.$router.push({
+              name: 'Leaderboard',
+            });
+          }).catch((err) => {
+            this.feedback = err.message;
+          });
+      } else {
+        this.feedback = 'Please fill in both fields';
       }
     },
-    methods: {
-      login() {
-        if (this.email && this.password) {
-          this.feedback = null
-          firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-            .then(user => {
-              this.$router.push({
-                name: 'Leaderboard'
-              })
-            }).catch(err => {
-              this.feedback = err.message
-            })
-        } else {
-          this.feedback = 'Please fill in both fields'
-        }
-      }
-    }
-  }
+  },
+};
 </script>
 
 

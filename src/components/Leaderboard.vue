@@ -43,23 +43,23 @@ export default {
     };
   },
   created() {
-    db.collection('players').orderBy("duration").limit(100).get()
+    db.collection('players').orderBy('duration').limit(100).get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
-          let player = doc.data()
-          player.id = doc.id
-          this.players.push(player)
+          const player = doc.data();
+          player.id = doc.id;
+          this.players.push(player);
         });
       });
   },
   filters: {
     millisToHumanReadable(duration) {
-      let minutes = Math.floor(duration / 60000)
-      let seconds = ((duration % 60000) / 1000).toFixed(0);
-      let centiseconds = ((duration / 10) % 100).toFixed(0);
-      return minutes + "'" + (seconds < 10 ? '0' : '') + seconds + "''" + (seconds < 10 ? '0' : '') + centiseconds;
-    }
-  }
+      const minutes = Math.floor(duration / 60000);
+      const seconds = ((duration % 60000) / 1000).toFixed(0);
+      const centiseconds = ((duration / 10) % 100).toFixed(0);
+      return `${minutes}'${seconds < 10 ? '0' : ''}${seconds}''${seconds < 10 ? '0' : ''}${centiseconds}`;
+    },
+  },
 };
 </script>
 

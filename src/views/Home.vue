@@ -13,7 +13,7 @@ export default {
   name: 'home',
   components: {
     Leaderboard,
-    AddTime
+    AddTime,
   },
 };
 </script>
