@@ -1,7 +1,15 @@
 <template>
-<div class="container">
+<div class="container is-fullhd">
+<section>
   <div class="columns is-centered">
-    <table class="table">
+      <figure class="image logo">
+      <a href="https://dfindconsulting.no/"><img src="@/assets/logo.png"></a>
+    </figure>
+  </div>
+</section>
+<section>
+  <div class="columns is-centered">
+    <table class="table leaderboard">
       <thead>
         <tr>
           <th>Position</th>
@@ -20,6 +28,7 @@
       </tbody>
     </table>
   </div>
+  </section>
 </div>
 </template>
 
@@ -56,4 +65,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+.leaderboard * {
+  color: orange;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  /* background: -webkit-linear-gradient(#366d0a, #2b1205);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  font-size: 25px;
+}
+
+.table th {
+  color: orangered;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.logo {
+  width: 500px;
+  margin-bottom: 20px
+}
 </style>

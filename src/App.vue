@@ -20,4 +20,11 @@ export default {
 #app{
   font-family: "Super Mario 256";
 }
+
+body {
+    background-image: url("./assets/background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center; 
+}
 </style>
