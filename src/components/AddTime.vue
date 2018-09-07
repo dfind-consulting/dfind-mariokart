@@ -1,6 +1,6 @@
   <template>
   <div class="container">
-    <div class="columns is-centered">
+    <div class="columns is-centered extra-margins">
       <form @submit.prevent="addTime">
         <div class="field name">
           <label for="name">name</label>
@@ -18,9 +18,9 @@
           <label for="centiseconds">centiseconds</label>
           <input type="number" name="centiseconds" v-model="centiseconds">
         </div>
-        <div class="field email">
-          <label for="email">email</label>
-          <input type="text" name="email" v-model="email">
+        <div class="field phone">
+          <label for="phone">phone</label>
+          <input type="text" name="phone" v-model="phone">
         </div>
         <div class="field">
           <p v-if="feedback" class="red-text">{{ feedback }}</p>
@@ -40,12 +40,11 @@ export default {
   data() {
     return {
       name: null,
-      email: null,
+      phone: null,
       minutes: 0,
       seconds: 0,
       centiseconds: 0,
       slug: null,
-
       feedback: null,
     };
   },
@@ -63,9 +62,10 @@ export default {
         // save to firestore
         db.collection('players').add({
           name: this.name,
-          email: this.email,
+          phone: this.phone,
           duration: (this.minutes * 60000) + (this.seconds * 1000) + (this.centiseconds * 10),
           slug: this.slug,
+          created: Date.now(),
         }).then(() => {
           this.$router.push({
             name: 'leaderboard',

@@ -14,7 +14,7 @@ export default {
 <style>
 @font-face {
   font-family: "Super Mario 256";
-  src: url("./assets/SuperMario256.ttf");
+  src: url("./assets/SuperMario256-nor.ttf");
 }
 
 #app{
@@ -26,5 +26,10 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+}
+
+.extra-margins {
+  margin-top: 25px;
+  margin-left: 25px;
 }
 </style>

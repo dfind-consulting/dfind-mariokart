@@ -1,8 +1,7 @@
 <template>
   <div class="login container">
-    <div class="columns is-centered" @submit.prevent="login">
+    <div class="columns is-centered extra-margins" @submit.prevent="login">
       <form>
-        <h2 class="center deep-purple-text">Login</h2>
         <div class="field">
           <label for="email">Email</label>
           <input id="email" type="email" v-model="email">
@@ -40,7 +39,7 @@ export default {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password)
           .then(() => {
             this.$router.push({
-              name: 'Leaderboard',
+              name: 'add',
             });
           }).catch((err) => {
             this.feedback = err.message;
