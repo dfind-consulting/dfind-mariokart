@@ -43,7 +43,7 @@ export default {
     };
   },
   created() {
-    db.collection('players').orderBy('duration').limit(100).get()
+    db.collection('players').orderBy('duration').limit(20).get()
       .then((snapshot) => {
         snapshot.forEach((doc) => {
           const player = doc.data();
